@@ -1,9 +1,9 @@
 Package: GMP
 Type: Package
 Title: Publication-Ready Chromosome and Genomic Feature Maps
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Fei", "Liang", email = "fyliangfei@163.com", role = c("aut", "cre"))
-Description: Creates publication-ready chromosome maps and annotates genes or other genomic features from chromosome lengths and genomic coordinates. The package provides validated input handling, reusable plot objects, automatic label placement, and vector or raster export for reproducible genomic visualization workflows.
+Description: Creates publication-ready chromosome maps and annotates genes or other genomic features from chromosome lengths and genomic coordinates. The package provides validated input handling, reusable plot objects, publication-oriented colour palettes, configurable chromosome and feature shapes, optional genomic-position axes, automatic label placement, highlighting, and vector or raster export for reproducible genomic visualization workflows.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: false

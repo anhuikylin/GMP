@@ -1,3 +1,15 @@
+# GMP 0.1.1
+
+* Added publication-oriented `soft`, `colorblind`, `earth`, and `mono` chromosome palettes through `gmp_palette()`.
+* Improved default chromosome colours and feature colours for cleaner scientific figures.
+* Added `chromosome_shape = "capsule"`, `"rounded"`, or `"rect"` plus fill, border, alpha, width, and border-width controls.
+* Added `feature_shape = "band"`, `"tick"`, `"point"`, or `"diamond"` plus colour, outline, width, alpha, and minimum-size controls.
+* Added optional genomic-position Y axes with left/right placement, `bp`/`kb`/`Mb` units, configurable breaks, title, colour, and optional guide lines.
+* Added figure title/subtitle, plot background, chromosome-label formatting, feature-label font/angle controls, connector styling, and feature highlighting.
+* Improved automatic label-side placement to favour the outer side of the chromosome layout and reduce crowding between neighbouring chromosomes.
+* Kept user-supplied chromosome and feature colours authoritative unless an explicit override is requested.
+* Added regression tests for the new styling and axis parameters.
+
 # GMP 0.1.0
 
 * Rebuilt GMP as a focused chromosome and genomic-feature visualization package.

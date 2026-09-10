@@ -2,30 +2,126 @@
 \name{GMP}
 \alias{GMP}
 \alias{plot_genome_map}
-\title{Draw a chromosome-level genomic feature map}
+\title{Draw a publication-ready chromosome-level genomic feature map}
 \usage{
 GMP(
   chr_length,
   gene_info = NULL,
-  radian = 0,
+  radian = 0.012,
   label_side = c("auto", "left", "right"),
   avoid_overlap = TRUE,
   label_offset = 0.018,
   label_cex = 0.9,
   chromosome_width = NULL,
-  draw = TRUE
+  draw = TRUE,
+  palette = c("soft", "colorblind", "earth", "mono"),
+  chromosome_shape = c("capsule", "rounded", "rect"),
+  chromosome_fill = NULL,
+  chromosome_border = NULL,
+  chromosome_border_width = 1.1,
+  chromosome_alpha = 1,
+  feature_shape = c("band", "tick", "point", "diamond"),
+  feature_color = NULL,
+  feature_border = NULL,
+  feature_border_width = 0.8,
+  feature_alpha = 1,
+  feature_width = 0.9,
+  feature_min_height = 0.0055,
+  show_labels = TRUE,
+  label_color = NULL,
+  label_fontface = c("plain", "bold", "italic", "bold.italic"),
+  label_angle = 0,
+  label_connector = TRUE,
+  connector_color = "#98A2AD",
+  connector_width = 0.8,
+  connector_lty = 1,
+  highlight = NULL,
+  highlight_color = "#D55E00",
+  highlight_label_color = "#B44A00",
+  show_y_axis = FALSE,
+  y_axis_side = c("left", "right"),
+  y_axis_unit = c("Mb", "kb", "bp"),
+  y_axis_breaks = 5,
+  y_axis_cex = 0.78,
+  y_axis_color = "#4A5560",
+  y_axis_title = NULL,
+  y_axis_grid = FALSE,
+  y_axis_grid_color = "#E6EBEF",
+  y_axis_grid_width = 0.6,
+  show_chr_labels = TRUE,
+  chromosome_label_position = c("top", "bottom"),
+  chromosome_label_cex = 1,
+  chromosome_label_color = "#263238",
+  chromosome_label_fontface = c("bold", "plain", "italic"),
+  chromosome_label_angle = 0,
+  title = NULL,
+  subtitle = NULL,
+  title_cex = 1.25,
+  subtitle_cex = 0.9,
+  title_color = "#1F2933",
+  subtitle_color = "#5B6770",
+  background = "white",
+  plot_padding = 0.08
 )
 
 plot_genome_map(
   chr_length,
   gene_info = NULL,
-  radian = 0,
+  radian = 0.012,
   label_side = c("auto", "left", "right"),
   avoid_overlap = TRUE,
   label_offset = 0.018,
   label_cex = 0.9,
   chromosome_width = NULL,
-  draw = TRUE
+  draw = TRUE,
+  palette = c("soft", "colorblind", "earth", "mono"),
+  chromosome_shape = c("capsule", "rounded", "rect"),
+  chromosome_fill = NULL,
+  chromosome_border = NULL,
+  chromosome_border_width = 1.1,
+  chromosome_alpha = 1,
+  feature_shape = c("band", "tick", "point", "diamond"),
+  feature_color = NULL,
+  feature_border = NULL,
+  feature_border_width = 0.8,
+  feature_alpha = 1,
+  feature_width = 0.9,
+  feature_min_height = 0.0055,
+  show_labels = TRUE,
+  label_color = NULL,
+  label_fontface = c("plain", "bold", "italic", "bold.italic"),
+  label_angle = 0,
+  label_connector = TRUE,
+  connector_color = "#98A2AD",
+  connector_width = 0.8,
+  connector_lty = 1,
+  highlight = NULL,
+  highlight_color = "#D55E00",
+  highlight_label_color = "#B44A00",
+  show_y_axis = FALSE,
+  y_axis_side = c("left", "right"),
+  y_axis_unit = c("Mb", "kb", "bp"),
+  y_axis_breaks = 5,
+  y_axis_cex = 0.78,
+  y_axis_color = "#4A5560",
+  y_axis_title = NULL,
+  y_axis_grid = FALSE,
+  y_axis_grid_color = "#E6EBEF",
+  y_axis_grid_width = 0.6,
+  show_chr_labels = TRUE,
+  chromosome_label_position = c("top", "bottom"),
+  chromosome_label_cex = 1,
+  chromosome_label_color = "#263238",
+  chromosome_label_fontface = c("bold", "plain", "italic"),
+  chromosome_label_angle = 0,
+  title = NULL,
+  subtitle = NULL,
+  title_cex = 1.25,
+  subtitle_cex = 0.9,
+  title_color = "#1F2933",
+  subtitle_color = "#5B6770",
+  background = "white",
+  plot_padding = 0.08
 )
 }
 \arguments{
@@ -33,11 +129,11 @@ plot_genome_map(
 
 \item{gene_info}{Optional data frame containing \code{chromosome}, \code{start}, \code{end}, and \code{label}. Optional columns \code{gene_color} and \code{label_color} control feature appearance.}
 
-\item{radian}{Non-negative corner radius in normalized device coordinates.}
+\item{radian}{Corner radius used when \code{chromosome_shape = "rounded"}.}
 
-\item{label_side}{Label placement: \code{"auto"}, \code{"left"}, or \code{"right"}.}
+\item{label_side}{Feature-label placement: \code{"auto"}, \code{"left"}, or \code{"right"}.}
 
-\item{avoid_overlap}{Logical; whether to adjust nearby labels vertically when possible.}
+\item{avoid_overlap}{Logical; adjust nearby labels vertically when possible.}
 
 \item{label_offset}{Horizontal distance between chromosome and label.}
 
@@ -46,20 +142,128 @@ plot_genome_map(
 \item{chromosome_width}{Optional chromosome width in normalized coordinates.}
 
 \item{draw}{Logical; draw immediately when \code{TRUE}.}
+
+\item{palette}{Chromosome palette used only when \code{chr_length$fill} is absent: \code{"soft"}, \code{"colorblind"}, \code{"earth"}, or \code{"mono"}.}
+
+\item{chromosome_shape}{Chromosome body shape: \code{"capsule"}, \code{"rounded"}, or \code{"rect"}.}
+
+\item{chromosome_fill}{Optional scalar or per-chromosome fill override.}
+
+\item{chromosome_border}{Optional scalar or per-chromosome border override.}
+
+\item{chromosome_border_width}{Chromosome border line width.}
+
+\item{chromosome_alpha}{Chromosome fill and border alpha between 0 and 1.}
+
+\item{feature_shape}{Feature glyph: \code{"band"}, \code{"tick"}, \code{"point"}, or \code{"diamond"}.}
+
+\item{feature_color}{Optional scalar or per-feature colour override.}
+
+\item{feature_border}{Optional feature outline colour. \code{NULL} uses the feature colour.}
+
+\item{feature_border_width}{Feature outline or line width.}
+
+\item{feature_alpha}{Feature alpha between 0 and 1.}
+
+\item{feature_width}{Feature glyph width relative to chromosome width.}
+
+\item{feature_min_height}{Minimum visible feature height in normalized coordinates.}
+
+\item{show_labels}{Logical; display feature labels.}
+
+\item{label_color}{Optional scalar or per-feature label-colour override.}
+
+\item{label_fontface}{Feature-label font face.}
+
+\item{label_angle}{Feature-label rotation in degrees.}
+
+\item{label_connector}{Logical; draw chromosome-to-label connectors.}
+
+\item{connector_color}{Connector colour. \code{NULL} uses the feature colour.}
+
+\item{connector_width}{Connector line width.}
+
+\item{connector_lty}{Connector line type.}
+
+\item{highlight}{Optional character vector of feature labels to highlight.}
+
+\item{highlight_color}{Highlight feature colour.}
+
+\item{highlight_label_color}{Highlight label colour.}
+
+\item{show_y_axis}{Logical; display a genomic-position Y axis.}
+
+\item{y_axis_side}{Y-axis side: \code{"left"} or \code{"right"}.}
+
+\item{y_axis_unit}{Y-axis unit: \code{"Mb"}, \code{"kb"}, or \code{"bp"}.}
+
+\item{y_axis_breaks}{Approximate number of Y-axis breaks.}
+
+\item{y_axis_cex}{Y-axis text scaling factor.}
+
+\item{y_axis_color}{Axis, tick, and text colour.}
+
+\item{y_axis_title}{Axis title. \code{NULL} creates an automatic title such as \code{Position (Mb)}. Use \code{""} to suppress the title while keeping ticks.}
+
+\item{y_axis_grid}{Logical; draw horizontal genomic-position guide lines.}
+
+\item{y_axis_grid_color}{Guide-line colour.}
+
+\item{y_axis_grid_width}{Guide-line width.}
+
+\item{show_chr_labels}{Logical; display chromosome names.}
+
+\item{chromosome_label_position}{Chromosome-name position: \code{"top"} or \code{"bottom"}.}
+
+\item{chromosome_label_cex}{Chromosome-name text scaling factor.}
+
+\item{chromosome_label_color}{Chromosome-name colour.}
+
+\item{chromosome_label_fontface}{Chromosome-name font face.}
+
+\item{chromosome_label_angle}{Chromosome-name rotation in degrees.}
+
+\item{title}{Optional figure title.}
+
+\item{subtitle}{Optional figure subtitle.}
+
+\item{title_cex}{Title text scaling factor.}
+
+\item{subtitle_cex}{Subtitle text scaling factor.}
+
+\item{title_color}{Title colour.}
+
+\item{subtitle_color}{Subtitle colour.}
+
+\item{background}{Plot background colour.}
+
+\item{plot_padding}{Horizontal outer padding in normalized coordinates.}
 }
-\value{A reusable object of class \code{gmp_plot}. If \code{draw = TRUE}, it is also rendered.}
-\description{Validates chromosome lengths and genomic coordinates, then constructs a reusable chromosome-map plot object. \code{GMP()} is the compatibility entry point and delegates to \code{plot_genome_map()}.}
+\value{
+A reusable object of class \code{gmp_plot}. If \code{draw = TRUE}, it is also rendered.
+}
+\description{
+Validates chromosome lengths and genomic coordinates, then constructs a reusable chromosome-map object with publication-oriented control over colours, chromosome and feature shapes, genomic-position axes, labels, highlighting, and figure annotation. \code{GMP()} is the compatibility entry point and delegates to \code{plot_genome_map()}.
+}
 \examples{
 chr <- data.frame(
   chromosome = c("Chr1", "Chr2", "Chr3"),
-  chr_length = c(300, 250, 220)
+  chr_length = c(300e6, 250e6, 220e6)
 )
 genes <- data.frame(
   chromosome = c("Chr1", "Chr3"),
-  start = c(30, 120),
-  end = c(35, 125),
+  start = c(30e6, 120e6),
+  end = c(35e6, 125e6),
   label = c("GeneA", "GeneB")
 )
-p <- GMP(chr, genes, draw = FALSE)
+
+p <- GMP(
+  chr, genes,
+  show_y_axis = TRUE,
+  y_axis_unit = "Mb",
+  feature_shape = "diamond",
+  title = "Candidate genes",
+  draw = FALSE
+)
 plot(p)
 }
